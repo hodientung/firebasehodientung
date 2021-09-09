@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "785044719799",
+    "project_id": "practicefirebase-88455",
+    "storage_bucket": "practicefirebase-88455.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785044719799:android:d7a051f2a893ce76c0e532",
+        "android_client_info": {
+          "package_name": "gst.training.practicefirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785044719799-5g04fp25dml2anopo0g35n0a0k2dsrb4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo6uzFLTpIP5HPupfjt0LlvlwV3DLpQno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785044719799-5g04fp25dml2anopo0g35n0a0k2dsrb4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
