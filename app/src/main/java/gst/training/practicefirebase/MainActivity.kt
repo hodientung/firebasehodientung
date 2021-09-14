@@ -1,7 +1,9 @@
 package gst.training.practicefirebase
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import gst.training.practicefirebase.service.TestFirebaseMessagingService
 import gst.training.practicefirebase.ui.UserFragment
 
 class MainActivity : AppCompatActivity() {
