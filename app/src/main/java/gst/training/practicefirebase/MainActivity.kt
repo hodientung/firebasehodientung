@@ -12,10 +12,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupUI()
+        startService(Intent(this, TestFirebaseMessagingService::class.java))
     }
 
     private fun setupUI() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.contentFrame, UserFragment.newInstance()).addToBackStack(null).commit()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService(Intent(this, TestFirebaseMessagingService::class.java))
     }
 }
