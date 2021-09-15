@@ -4,14 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/drawable-v24/gradient.xml" value="0.2203125" />
+        <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/drawable-v24/ic_add.xml" value="0.2203125" />
         <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/drawable-v24/tab_icon_color_selector.xml" value="0.1125" />
         <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/activity_main.xml" value="0.11730072463768115" />
+        <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/fragment_add_dialog.xml" value="0.17" />
         <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/fragment_my_garden.xml" value="0.11730072463768115" />
         <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/fragment_plant.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/fragment_plant_list.xml" value="0.11730072463768115" />
-        <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/fragment_user.xml" value="0.128125" />
+        <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/fragment_user.xml" value="0.2" />
         <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/item_plant_list.xml" value="0.21" />
-        <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/item_user.xml" value="0.25" />
+        <entry key="..\:/Users/tungd/AndroidStudioProjects/PracticeFireBase/app/src/main/res/layout/item_user.xml" value="0.18" />
       </map>
     </option>
   </component>
