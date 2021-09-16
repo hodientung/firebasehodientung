@@ -10,27 +10,25 @@ import androidx.lifecycle.ViewModelProvider
 import gst.training.practicefirebase.R
 import gst.training.practicefirebase.data.User
 import gst.training.practicefirebase.viewmodel.UserViewModel
-import kotlinx.android.synthetic.main.fragment_add_dialog.*
+import kotlinx.android.synthetic.main.fragment_update_user_dialog.*
 
 
-class AddDialogFragment : DialogFragment() {
+class UpdateUserDialogFragment(private val user: User) : DialogFragment() {
 
     private lateinit var userViewModel: UserViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         setupViewModel()
-        return inflater.inflate(R.layout.fragment_add_dialog, container, false)
+        return inflater.inflate(R.layout.fragment_update_user_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupObserverUser()
-        setupEventAddUser()
-    }
+        etNameUpdate.setText(user.name)
 
-    private fun setupObserverUser() {
         userViewModel.result.observe(viewLifecycleOwner, {
             val message = if (it == null) {
                 getString(R.string.user_added)
@@ -40,18 +38,15 @@ class AddDialogFragment : DialogFragment() {
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
             dismiss()
         })
-    }
 
-    private fun setupEventAddUser() {
-        btnAddUser.setOnClickListener {
-            val name = etName.text.toString().trim()
+        btnAddUserUpdate.setOnClickListener {
+            val name = etNameUpdate.text.toString().trim()
             if (name.isEmpty()) {
-                etName.error = getString(R.string.error_field_required)
+                etNameUpdate.error = getString(R.string.error_field_required)
                 return@setOnClickListener
             }
-            val user = User()
             user.name = name
-            userViewModel.addUser(user)
+            userViewModel.updateUser(user)
         }
     }
 
@@ -61,10 +56,4 @@ class AddDialogFragment : DialogFragment() {
     }
 
     private fun getViewModel() = UserViewModel::class.java
-
-    companion object {
-
-        @JvmStatic
-        fun newInstance() = AddDialogFragment()
-    }
 }

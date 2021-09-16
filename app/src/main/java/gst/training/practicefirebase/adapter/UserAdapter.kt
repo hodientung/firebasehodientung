@@ -3,14 +3,17 @@ package gst.training.practicefirebase.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import gst.training.practicefirebase.R
 import gst.training.practicefirebase.data.User
+import gst.training.practicefirebase.ui.RecyclerViewClickListener
 import kotlinx.android.synthetic.main.item_user.view.*
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+
+    private var users = mutableListOf<User>()
+    var listener: RecyclerViewClickListener? = null
 
     private val differCallback = object : DiffUtil.ItemCallback<User>() {
 
@@ -22,31 +25,50 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
             return oldItem == newItem
         }
     }
-    private var onItemClick: (User) -> Unit = {}
-    val differ = AsyncListDiffer(this, differCallback)
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder =
         UserViewHolder(
-            onItemClick,
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_user, parent, false
             )
         )
 
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val user = differ.currentList[position]
-        holder.bindItemCategory(user)
+    fun setUsers(users: List<User>) {
+        this.users = users as MutableList<User>
+        notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = differ.currentList.size
+    fun addUser(user: User) {
+        if (!users.contains(user)) {
+            users.add(user)
+        } else {
+            val index = users.indexOf(user)
+            if (user.isDeleted) {
+                users.removeAt(index)
+            } else {
+                users[index] = user
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        holder.bindItemCategory(users[position])
+    }
+
+    override fun getItemCount(): Int = users.size
 
 
-    inner class UserViewHolder(onClickItem: (User) -> Unit, itemView: View) :
+    inner class UserViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
         init {
-            itemView.setOnClickListener {
-                onClickItem(differ.currentList[adapterPosition])
+            itemView.ivUpdate.setOnClickListener {
+                listener?.onRecyclerViewItemClicked(it, users[adapterPosition])
+            }
+            itemView.ivDelete.setOnClickListener {
+                listener?.onRecyclerViewItemClicked(it, users[adapterPosition])
             }
         }
 

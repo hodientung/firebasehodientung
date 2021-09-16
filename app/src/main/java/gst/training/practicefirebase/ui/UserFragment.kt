@@ -1,5 +1,6 @@
 package gst.training.practicefirebase.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import gst.training.practicefirebase.R
 import gst.training.practicefirebase.adapter.UserAdapter
+import gst.training.practicefirebase.data.User
 import gst.training.practicefirebase.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_user.*
 
 
-class UserFragment : Fragment() {
+class UserFragment : Fragment(), RecyclerViewClickListener {
 
     private lateinit var userViewModel: UserViewModel
     private val userAdapter = UserAdapter()
@@ -31,6 +33,13 @@ class UserFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         moveToAddDialogFragmentScreen()
+
+        userViewModel.users.observe(viewLifecycleOwner, {
+            userAdapter.setUsers(it)
+        })
+        userViewModel.author.observe(viewLifecycleOwner,{
+            userAdapter.addUser(it)
+        })
     }
 
     private fun moveToAddDialogFragmentScreen() {
@@ -47,6 +56,7 @@ class UserFragment : Fragment() {
                 (rvUser.layoutManager as LinearLayoutManager).orientation
             )
         )
+        userAdapter.listener = this
         rvUser.adapter = userAdapter
     }
 
@@ -61,4 +71,25 @@ class UserFragment : Fragment() {
         @JvmStatic
         fun newInstance() = UserFragment()
     }
+
+    override fun onRecyclerViewItemClicked(view: View, user: User) {
+        when (view.id) {
+            R.id.ivUpdate -> {
+                UpdateUserDialogFragment(user).show(childFragmentManager, "")
+            }
+            R.id.ivDelete -> {
+                showDialogDelete(user)
+            }
+        }
+    }
+
+    private fun showDialogDelete(user: User) {
+        AlertDialog.Builder(requireContext()).also {
+            it.setTitle(getString(R.string.delete_confirmation))
+            it.setPositiveButton(getString(R.string.yes)) { _, _ ->
+                userViewModel.deleteUser(user)
+            }
+        }.create().show()
+    }
+
 }
